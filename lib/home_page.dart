@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:soulfit/physical_fitness.dart';
-import 'package:soulfit/profile_page.dart';
+import 'physical_fitness.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,53 +14,6 @@ class HomePage extends StatelessWidget {
   void openProfile(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: ((context) => const UserProfile())));
-  }
-
-  Widget buildCard(
-      String title, Color color, String desc, BuildContext context) {
-    return InkWell(
-      onTap: () => navigate(context),
-      splashColor: color,
-      borderRadius: BorderRadius.circular(35),
-      child: Card(
-        color: Colors.transparent,
-        elevation: 15,
-        child: Container(
-          height: 150,
-          width: 400,
-          decoration: BoxDecoration(
-              color: color, borderRadius: BorderRadius.circular(35)),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white70),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  desc,
-                  style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black54,
-                      fontStyle: FontStyle.italic),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -76,29 +29,35 @@ class HomePage extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(200),
           child: Container(
-            padding: const EdgeInsets.only(bottom: 150, left: 20),
+            padding: const EdgeInsets.only(bottom: 100, left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 30,
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Row(
                     children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
                       const Text(
-                        'Good Morning!',
+                        'Good \nMorning!',
                         style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.white70,
+                          fontSize: 40,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(
-                        width: 80,
+                        width: 60,
                       ),
                       IconButton(
                         icon: const Icon(Icons.account_circle_rounded),
-                        iconSize: 35,
-                        color: Colors.white70,
+                        iconSize: 45,
+                        color: Colors.white,
                         onPressed: (() => openProfile(context)),
                       )
                     ],
@@ -110,30 +69,204 @@ class HomePage extends StatelessWidget {
         ),
         elevation: 15,
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          buildCard('Physical Fitness', const Color.fromRGBO(204, 96, 112, 1),
-              '“The body achieves what the mind believes.”', context),
-          const SizedBox(
-            height: 30,
-          ),
-          buildCard(
-              'Mental Fitness',
-              const Color.fromRGBO(97, 159, 210, 1),
-              '"Exercise keeps you occupied, which is good for your mental health."',
-              context),
-          const SizedBox(
-            height: 30,
-          ),
-          buildCard(
-              'Meditation',
-              const Color.fromRGBO(107, 186, 142, 1),
-              '"Deep breathing is our nervous system’s love language." ',
-              context)
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Card(
+              elevation: 8,
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => navigate(context),
+                child: SizedBox(
+                  height: 150,
+                  width: 400,
+                  child: Stack(children: [
+                    Container(
+                      height: 150,
+                      width: 400,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: const Color.fromRGBO(204, 89, 112, 1)),
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 52,
+                      child: Image.asset(
+                        "assets/images/Vector 3.png",
+                      ),
+                    ),
+                    Positioned(
+                      right: 15,
+                      top: 30,
+                      child: Image.asset(
+                        "assets/images/Image7.png",
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+                    const Positioned(
+                      top: 60,
+                      left: 30,
+                      child: Text(
+                        'Physical Fitness',
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    )
+                  ]),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Card(
+              color: Colors.transparent,
+              elevation: 8,
+              child: InkWell(
+                child: SizedBox(
+                  height: 150,
+                  width: 400,
+                  child: Stack(children: [
+                    Container(
+                      height: 150,
+                      width: 400,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: const Color.fromRGBO(97, 159, 210, 1),
+                      ),
+                    ),
+                    Positioned(
+                      top: 50,
+                      right: 70,
+                      child: SizedBox(
+                        width: 200,
+                        height: 80,
+                        child: Image.asset(
+                          "assets/images/Vector 8.png",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      left: 20,
+                      child: SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: Image.asset(
+                          "assets/images/Vector 8.png",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      height: 150,
+                      right: 18,
+                      child: Image.asset(
+                        "assets/images/Image14.png",
+                        height: 95,
+                        width: 95,
+                      ),
+                    ),
+                    const Positioned(
+                      top: 60,
+                      left: 30,
+                      child: Text(
+                        'Meditation',
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    )
+                  ]),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            InkWell(
+              child: SizedBox(
+                height: 150,
+                width: 400,
+                child: Stack(children: [
+                  Container(
+                    height: 150,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: const Color.fromRGBO(77, 189, 139, 1),
+                    ),
+                  ),
+                  Positioned(
+                    top: 80,
+                    right: 100,
+                    child: SizedBox(
+                      height: 100,
+                      width: 170,
+                      child: Image.asset(
+                        "assets/images/Vector 2.png",
+                        height: 100,
+                        width: 170,
+                      ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 25,
+                    left: 15,
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Color.fromRGBO(32, 157, 101, 1),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 15,
+                    left: 70,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Color.fromRGBO(32, 157, 101, 1),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 80,
+                    right: 125,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Color.fromRGBO(32, 157, 101, 1),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 110,
+                    left: 140,
+                    child: CircleAvatar(
+                      radius: 7,
+                      backgroundColor: Color.fromRGBO(32, 157, 101, 1),
+                    ),
+                  ),
+                  Positioned(
+                    height: 150,
+                    right: 18,
+                    child: Image.asset(
+                      "assets/images/Image12.png",
+                      height: 95,
+                      width: 95,
+                    ),
+                  ),
+                  const Positioned(
+                    top: 60,
+                    left: 30,
+                    child: Text(
+                      'Mental Fitness',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                  )
+                ]),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
