@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soulfit/home_page.dart';
+import 'package:soulfit/home_page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +16,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SoulFit',
       home: const HomePage(),
-      theme: ThemeData(canvasColor: const Color.fromRGBO(233, 234, 236, 1)),
+      theme: ThemeData(
+        canvasColor: const Color.fromRGBO(233, 234, 236, 1),
+      ),
     );
   }
 }
