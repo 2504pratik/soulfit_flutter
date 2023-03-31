@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soulfit/home_page/home_page.dart';
+import 'package:soulfit/login_page/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SoulFit',
-      home: const HomePage(),
+      home: LoginPage(),
       theme: ThemeData(
         canvasColor: const Color.fromRGBO(233, 234, 236, 1),
       ),

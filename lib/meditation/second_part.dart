@@ -157,7 +157,8 @@ class SecondPart extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => BreathingExercise())));
+                                builder: ((context) =>
+                                    const BreathingExercise())));
                       },
                       child: CircleAvatar(
                         backgroundColor: Colors.white.withOpacity(0.75),

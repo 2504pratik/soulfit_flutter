@@ -10,7 +10,7 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(159, 191, 193, 1),
       body: Column(
-        children: const [FirstPart()],
+        children: [FirstPart()],
       ),
     );
   }

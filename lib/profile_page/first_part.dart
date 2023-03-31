@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:soulfit/models/profile.dart';
+import 'package:soulfit/profile_page/edit_info.dart';
 
 import '../home_page/home_page.dart';
 
 class FirstPart extends StatelessWidget {
-  const FirstPart({Key? key}) : super(key: key);
-
+  FirstPart({Key? key}) : super(key: key);
+  Profile _profile = Profile();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,46 +38,26 @@ class FirstPart extends StatelessWidget {
                   "My Profile",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                 ),
-                IconButton(
-                  onPressed: (() {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Center(
-                          child: SizedBox(
-                            height: 500,
-                            width: 400,
-                            child: AlertDialog(
-                              actions: [
-                                Center(
-                                  child: ElevatedButton(
-                                    child: const Text('Save'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ),
-                              ],
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              title: const Text('Edit Info'),
-                              content: Column(
-                                  children: const [TextField(), TextField()]),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }),
-                  icon: const Icon(
-                    Icons.edit,
-                    color: Color.fromRGBO(28, 85, 97, 1),
-                  ),
-                )
+                const EditInfo()
               ],
             ),
-          )
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const CircleAvatar(
+            backgroundColor: Colors.white60,
+            radius: 70,
+            child: Icon(
+              Icons.person,
+              size: 70,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text("${_profile.name}")
         ],
       ),
     );
