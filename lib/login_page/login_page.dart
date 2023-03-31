@@ -25,9 +25,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildEmailTextField() {
     return TextFormField(
+      cursorColor: Colors.black,
       decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        filled: true,
+        fillColor: Color.fromRGBO(159, 191, 193, 0.5),
         labelText: 'Email',
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
       keyboardType: TextInputType.emailAddress,
       controller: _emailController,
@@ -36,9 +43,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildPasswordTextField() {
     return TextFormField(
+      cursorColor: Colors.black,
       decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        filled: true,
+        fillColor: Color.fromRGBO(159, 191, 193, 0.5),
         labelText: 'Password',
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
       obscureText: true,
       controller: _passwordController,
@@ -47,9 +61,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildConfirmPasswordTextField() {
     return TextFormField(
+      cursorColor: Colors.black,
       decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        filled: true,
+        fillColor: Color.fromRGBO(159, 191, 193, 0.5),
         labelText: 'Confirm Password',
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
       obscureText: true,
       controller: _confirmPasswordController,
@@ -62,7 +83,8 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         const Text(
           'Sign In',
-          style: TextStyle(color: Colors.black, fontSize: 25),
+          style: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16.0),
         _buildEmailTextField(),
@@ -99,7 +121,8 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         const Text(
           'Create Account',
-          style: TextStyle(color: Colors.black, fontSize: 25),
+          style: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16.0),
         _buildEmailTextField(),
@@ -135,9 +158,34 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: _isLoginForm ? _buildLoginForm() : _buildCreateAccountForm(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(300),
+                ),
+                color: const Color.fromRGBO(44, 105, 117, 1),
+              ),
+              height: 300,
+              width: double.maxFinite,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child:
+                  _isLoginForm ? _buildLoginForm() : _buildCreateAccountForm(),
+            ),
+          ],
+        ),
       ),
     );
   }
