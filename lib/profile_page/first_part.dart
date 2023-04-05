@@ -1,16 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:soulfit/login_page/login_page.dart';
 import 'package:soulfit/models/profile.dart';
 import 'package:soulfit/profile_page/edit_info.dart';
 
 import '../home_page/home_page.dart';
 
+// ignore: must_be_immutable
 class FirstPart extends StatelessWidget {
   FirstPart({Key? key}) : super(key: key);
-  Profile _profile = Profile();
+  final Profile _profile = Profile();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 400,
       child: Column(
         children: [
           const SizedBox(
@@ -57,7 +62,16 @@ class FirstPart extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text("${_profile.name}")
+          Text("${_profile.name}"),
+          ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                await googleSignIn.signOut();
+                Navigator.of(context).pop((route) => MaterialPageRoute(
+                      builder: (context) => const LogIn(),
+                    ));
+              },
+              child: Text('Log Out'))
         ],
       ),
     );

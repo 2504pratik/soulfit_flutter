@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "267220899220",
+    "project_id": "soulfit-d3dd5",
+    "storage_bucket": "soulfit-d3dd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267220899220:android:2e3a767328b0042f88eb81",
+        "android_client_info": {
+          "package_name": "com.example.soulfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267220899220-fmpmdpnap5hm60r2ej2dql96u8gok1bl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqGtRrrcrHgL1WQa9CeFPP87HQBKLO7Nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267220899220-fmpmdpnap5hm60r2ej2dql96u8gok1bl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
