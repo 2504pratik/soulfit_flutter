@@ -21,7 +21,7 @@ class UserProfile extends StatelessWidget {
                 Column(
                   children: [
                     FirstPart(),
-                    MidPart(),
+                    const MidPart(),
                     LastPart(),
                     const ExtraPart(),
                   ],

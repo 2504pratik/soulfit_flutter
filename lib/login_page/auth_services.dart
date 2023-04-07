@@ -23,8 +23,6 @@ class AuthService {
 
         await FirebaseAuth.instance.signInWithCredential(credential);
       }
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 }
