@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:soulfit/profile_page/extra_part.dart';
 
 import 'package:soulfit/profile_page/first_part.dart';
+import 'package:soulfit/profile_page/info_container.dart';
+import 'package:soulfit/profile_page/last_part.dart';
+import 'package:soulfit/profile_page/mid_part.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -8,9 +12,30 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(159, 191, 193, 1),
-      body: Column(
-        children: [FirstPart()],
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    FirstPart(),
+                    MidPart(),
+                    LastPart(),
+                    const ExtraPart(),
+                  ],
+                ),
+                const Positioned(
+                  top: 350,
+                  left: 0,
+                  right: 0,
+                  child: InfoContainer(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ class PhysicalTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: ((context) => const PhysicalFitness()))),
+          MaterialPageRoute(builder: ((context) => PhysicalFitness()))),
       child: SizedBox(
         height: 150,
         width: 400,

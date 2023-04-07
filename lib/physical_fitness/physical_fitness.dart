@@ -6,9 +6,7 @@ class PhysicalFitness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Physical Fitness Tab'),
-      ),
+      appBar: AppBar(),
     );
   }
 }

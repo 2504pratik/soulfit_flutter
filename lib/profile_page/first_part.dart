@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:soulfit/login_page/login_page.dart';
+
 import 'package:soulfit/models/profile.dart';
 import 'package:soulfit/profile_page/edit_info.dart';
 
@@ -11,11 +9,12 @@ import '../home_page/home_page.dart';
 class FirstPart extends StatelessWidget {
   FirstPart({Key? key}) : super(key: key);
   final Profile _profile = Profile();
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
+    return Container(
+      color: const Color.fromRGBO(159, 191, 193, 1),
+      height: 500,
       child: Column(
         children: [
           const SizedBox(
@@ -62,16 +61,11 @@ class FirstPart extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text("${_profile.name}"),
-          ElevatedButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                await googleSignIn.signOut();
-                Navigator.of(context).pop((route) => MaterialPageRoute(
-                      builder: (context) => const LogIn(),
-                    ));
-              },
-              child: Text('Log Out'))
+          const Text(
+            'My Name',
+            style: TextStyle(
+                color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500),
+          ),
         ],
       ),
     );
