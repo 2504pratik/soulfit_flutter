@@ -112,7 +112,7 @@ class _PomodoroState extends State<Pomodoro> with TickerProviderStateMixin {
                             circularStrokeCap: CircularStrokeCap.round,
                             radius: 55,
                             lineWidth: 5,
-                            percent: _timeLeft / _initialTime,
+                            percent: _timeLeft % 60 / 60,
                             backgroundColor: Colors.transparent,
                             progressColor:
                                 const Color.fromRGBO(134, 225, 184, 1),
