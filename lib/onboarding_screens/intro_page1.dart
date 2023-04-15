@@ -1,9 +1,7 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 
-class intro_page1 extends StatelessWidget {
-  const intro_page1({super.key});
+class IntroPage1 extends StatelessWidget {
+  const IntroPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
