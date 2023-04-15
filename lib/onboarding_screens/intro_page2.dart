@@ -33,7 +33,7 @@ class _MyAppState extends State<intro_page2> {
           children: [
             const Text("Student",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            Image.asset('assets/std.png'),
+            Image.asset('assets/images/std.png'),
           ],
         ),
       ),
@@ -56,7 +56,7 @@ class _MyAppState extends State<intro_page2> {
           children: [
             const Text("Employee",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            Image.asset('assets/emp.png'),
+            Image.asset('assets/images/emp.png'),
           ],
         ),
       ),
@@ -79,7 +79,7 @@ class _MyAppState extends State<intro_page2> {
           children: [
             const Text("Teacher",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            Image.asset('assets/prof.png'),
+            Image.asset('assets/images/prof.png'),
           ],
         ),
       ),
@@ -102,7 +102,7 @@ class _MyAppState extends State<intro_page2> {
           children: [
             const Text("Retired",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            Image.asset('assets/retired.png'),
+            Image.asset('assets/images/retired.png'),
           ],
         ),
       ),

@@ -34,7 +34,7 @@ class intro_page1 extends StatelessWidget {
               const Text('First, let\'s get to know you',
               style:TextStyle(fontSize:30,color:Colors.white,fontWeight: FontWeight.bold),
               textAlign:TextAlign.start ,
-              )
+              ),
               
               
             ],
@@ -44,6 +44,6 @@ class intro_page1 extends StatelessWidget {
 
           )
             
-        );
+    );
   }
 }
