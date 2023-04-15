@@ -21,9 +21,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           PageView(
             controller: _controller,
             children: const [
-              IntroPage1(),
-              IntroPage2(),
-              IntroPage3(),
+              intro_page1(),
+              intro_page2(),
+              intro_page3(),
             ],
           ),
           Container(

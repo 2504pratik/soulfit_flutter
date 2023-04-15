@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class IntroPage2 extends StatelessWidget {
-  const IntroPage2({Key? key}) : super(key: key);
+class intro_page2 extends StatelessWidget {
+  const intro_page2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
