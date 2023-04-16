@@ -48,7 +48,26 @@ class IntroPage1 extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
-                  )
+                  ),
+
+                  Container(
+                    height: 54,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Enter your name",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xffDBE2E8),
+                    ),
+                  ),
                 ],
               ),
             )));
