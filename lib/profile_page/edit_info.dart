@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soulfit/models/profile.dart';
+
+import '../models/dbHelper.dart';
 
 class EditInfo extends StatefulWidget {
   const EditInfo({Key? key}) : super(key: key);
@@ -9,7 +10,26 @@ class EditInfo extends StatefulWidget {
 }
 
 class _EditInfoState extends State<EditInfo> {
-  final Profile _profile = Profile();
+  var _nameController = TextEditingController();
+  late double height;
+  late double weight;
+  late String profession;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+    fetchName();
+  }
+
+  void fetchName() async {
+    final db = await SQLHelper.db();
+    final users = await db.query('user');
+    if (users.isNotEmpty) {
+      final name = users[0]['name'] as String;
+      _nameController.text = name;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +63,15 @@ class _EditInfoState extends State<EditInfo> {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     content: Column(children: [
-                      TextField(
-                        decoration: const InputDecoration(
-                          labelText: 'Name',
-                          labelStyle:
-                              TextStyle(color: Color.fromRGBO(28, 85, 97, 1)),
-                        ),
-                        onChanged: (value) {
-                          setState(() {
-                            _profile.name = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 16.0),
+                      // TextField(
+                      //   decoration: const InputDecoration(
+                      //     labelText: 'Name',
+                      //     labelStyle:
+                      //         TextStyle(color: Color.fromRGBO(28, 85, 97, 1)),
+                      //   ),
+                      //   onChanged: (value) {},
+                      // ),
+                      // const SizedBox(height: 16.0),
                       TextField(
                         decoration: const InputDecoration(
                           labelText: 'Height (cm)',
@@ -63,10 +79,13 @@ class _EditInfoState extends State<EditInfo> {
                               TextStyle(color: Color.fromRGBO(28, 85, 97, 1)),
                         ),
                         keyboardType: TextInputType.number,
-                        onChanged: (value) {
+                        onSubmitted: (value) async {
+                          final height = double.parse(value);
                           setState(() {
-                            _profile.height = double.tryParse(value)!;
+                            this.height = height;
                           });
+                          await SQLHelper.updateHeight(
+                              height, _nameController.text);
                         },
                       ),
                       const SizedBox(height: 16.0),
@@ -77,10 +96,13 @@ class _EditInfoState extends State<EditInfo> {
                               TextStyle(color: Color.fromRGBO(28, 85, 97, 1)),
                         ),
                         keyboardType: TextInputType.number,
-                        onChanged: (value) {
+                        onSubmitted: (value) async {
+                          final weight = double.parse(value);
                           setState(() {
-                            _profile.weight = double.tryParse(value)!;
+                            this.weight = weight;
                           });
+                          await SQLHelper.updateWeight(
+                              weight, _nameController.text);
                         },
                       ),
                       const SizedBox(height: 16.0),
@@ -90,10 +112,13 @@ class _EditInfoState extends State<EditInfo> {
                           labelStyle:
                               TextStyle(color: Color.fromRGBO(28, 85, 97, 1)),
                         ),
-                        onChanged: (value) {
+                        onSubmitted: (value) async {
+                          final profession = value;
                           setState(() {
-                            _profile.profession = value;
+                            this.profession = profession;
                           });
+                          await SQLHelper.updateProfession(
+                              profession, _nameController.text);
                         },
                       ),
                     ]),

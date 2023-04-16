@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:soulfit/login_page/login_page.dart';
 
-import '../login_page/login_page.dart';
+import '../models/dbHelper.dart';
 
 class LastPart extends StatelessWidget {
   LastPart({Key? key}) : super(key: key);
@@ -97,10 +98,14 @@ class LastPart extends StatelessWidget {
                       const Size(double.infinity, 50))),
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
+
                 await googleSignIn.signOut();
-                Navigator.of(context).pop((route) => MaterialPageRoute(
-                      builder: (context) => const LogIn(),
-                    ));
+                await SQLHelper.deleteDatabaseFile();
+
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LogIn()),
+                  (route) => false,
+                );
               },
               child: const Center(
                   child: Text(

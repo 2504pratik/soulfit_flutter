@@ -1,35 +1,48 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
-// ignore: unused_import
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:soulfit/home_page/home_page.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-void main() => runApp(intro_page3());
+import '../models/dbHelper.dart';
 
-class intro_page3 extends StatefulWidget {
-  const intro_page3({super.key});
+class IntroPage3 extends StatefulWidget {
+  String name;
+  IntroPage3({required this.name, super.key});
 
   @override
-  State<intro_page3> createState() => _MyAppState();
+  State<IntroPage3> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<intro_page3> {
+class _MyAppState extends State<IntroPage3> {
   double widgetPointerValue = 30;
-  double widgetPointerValue2=15;
+  double widgetPointerValue2 = 15;
+  late String gender;
+  late double weight;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xFF1A4C5B),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0,120,0,0),
-              child: Row(
+    return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+              (Route<dynamic> route) => false);
+        },
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double>(0),
+          backgroundColor: MaterialStateProperty.all<Color>(
+              const Color.fromRGBO(26, 76, 91, 1)),
+        ),
+        child: Image.asset('assets/images/next_btn.png'),
+      ),
+      backgroundColor: const Color(0xFF1A4C5B),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+          child: Column(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
@@ -44,60 +57,93 @@ class _MyAppState extends State<intro_page3> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               "Gender",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w600),
                             ),
-                            Container(
-                              height: 40,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF1A4C5B),
-                                borderRadius: BorderRadius.circular(10),
+                            ElevatedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  gender = 'Female';
+                                });
+                                await SQLHelper.updateGender(
+                                    widget.name, gender);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFF1A4C5B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 0,
                               ),
-                              child: Center(
-                                child: Text("Female",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400)),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF1A4C5B),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text("Male",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400)),
+                              child: const Center(
+                                child: Text(
+                                  'Female',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                               ),
                             ),
-                            Container(
-                              height: 40,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF1A4C5B),
-                                borderRadius: BorderRadius.circular(10),
+                            ElevatedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  gender = 'Male';
+                                });
+                                await SQLHelper.updateGender(
+                                    widget.name, gender);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFF1A4C5B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 0,
                               ),
-                              child: Center(
-                                child: Text("Others",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400)),
+                              child: const Center(
+                                child: Text(
+                                  'Male',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  gender = 'Others';
+                                });
+                                await SQLHelper.updateGender(
+                                    widget.name, gender);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFF1A4C5B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Others',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         height: 250,
                         width: 175,
@@ -111,7 +157,7 @@ class _MyAppState extends State<intro_page3> {
                             RichText(
                               text: TextSpan(
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                       text: 'Weight',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -120,7 +166,7 @@ class _MyAppState extends State<intro_page3> {
                                   WidgetSpan(
                                     child: Transform.translate(
                                       offset: const Offset(0, 2),
-                                      child: Text(
+                                      child: const Text(
                                         '(Kgs)',
                                         //superscript is usually smaller in size
                                         textScaleFactor: 0.8,
@@ -141,25 +187,33 @@ class _MyAppState extends State<intro_page3> {
                                       RegExp(r'[0-9]')),
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                                 cursorColor:
                                     Colors.white, // set the input color to red
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   filled: true,
                                   fillColor: Color(0xFF1A4C5B),
                                   contentPadding:
                                       EdgeInsets.symmetric(horizontal: 10),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 2, color: Colors.black),
+                                    borderSide: BorderSide(
+                                        width: 2, color: Colors.black),
                                   ),
                                 ),
+                                onSubmitted: (value) async {
+                                  final weight = double.parse(value);
+                                  setState(() {
+                                    this.weight = weight;
+                                  });
+                                  await SQLHelper.updateWeight(
+                                      weight, widget.name);
+                                },
                               ),
                             ),
                             RichText(
                               text: TextSpan(
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                       text: 'Age',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -168,103 +222,108 @@ class _MyAppState extends State<intro_page3> {
                                   WidgetSpan(
                                     child: Transform.translate(
                                       offset: const Offset(0, 2),
-                                      child: Text(
+                                      child: const Text(
                                         '(Yrs)',
                                         textScaleFactor: 0.8,
                                         style: TextStyle(color: Colors.black),
                                       ),
                                     ),
                                   ),
-          
-                                  
                                 ],
                               ),
                             ),
-          
-          
+
                             GestureDetector(
-                            child: SfLinearGauge(
-                              minimum: 15,
-                              maximum: 70,
-                              orientation: LinearGaugeOrientation.horizontal,
-                              markerPointers: [
-                                LinearShapePointer(
-                                    elevation: 3,
-                                    elevationColor: Colors.blueGrey,
+                              child: SfLinearGauge(
+                                minimum: 15,
+                                maximum: 70,
+                                orientation: LinearGaugeOrientation.horizontal,
+                                markerPointers: [
+                                  LinearShapePointer(
+                                      elevation: 3,
+                                      elevationColor: Colors.blueGrey,
+                                      value: widgetPointerValue2,
+                                      onChanged: (value) async {
+                                        setState(() {
+                                          widgetPointerValue2 = value;
+                                        });
+                                        await SQLHelper.updateAge(
+                                            widgetPointerValue2, widget.name);
+                                      },
+                                      color: widgetPointerValue2 < 70
+                                          ? const Color(0xFF1A4C5B)
+                                          : widgetPointerValue < 50
+                                              ? const Color(0xFF1A4C5B)
+                                                  .withOpacity(0.3)
+                                              : const Color(0xFF1A4C5B)
+                                                  .withOpacity(0.1)),
+                                  LinearWidgetPointer(
                                     value: widgetPointerValue2,
                                     onChanged: (value1) {
-                                      setState(
-                                        () {
-                                          widgetPointerValue2 = value1;
-                                        },
-                                      );
+                                      setState(() {
+                                        widgetPointerValue2 = value1;
+                                      });
                                     },
-                                    color: widgetPointerValue2 < 70
-                                        ? Color(0xFF1A4C5B)
-                                        : widgetPointerValue < 50
-                                            ? Color(0xFF1A4C5B).withOpacity(0.3)
-                                            : Color(0xFF1A4C5B).withOpacity(0.1)),
-                                LinearWidgetPointer(
-                                  value: widgetPointerValue2,
-                                  onChanged: (value1) {
-                                    setState(() {
-                                      widgetPointerValue2 = value1;
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 30,
-                                    child: Center(
-                                      child: Text(
-                                        widgetPointerValue2.toStringAsFixed(0),
-                                        style: TextStyle(
+                                    position: LinearElementPosition.inside,
+                                    child: SizedBox(
+                                      width: 40,
+                                      height: 30,
+                                      child: Center(
+                                        child: Text(
+                                          widgetPointerValue2
+                                              .toStringAsFixed(0),
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 20,
                                             color: widgetPointerValue < 70
-                                                ? Color(0xFF1A4C5B)
+                                                ? const Color(0xFF1A4C5B)
                                                     .withOpacity(0.2)
                                                 : widgetPointerValue < 50
-                                                    ? Color(0xFF1A4C5B)
+                                                    ? const Color(0xFF1A4C5B)
                                                         .withOpacity(0.4)
-                                                    : Color(0xFF1A4C5B)
-                                                        .withOpacity(0.3)),
+                                                    : const Color(0xFF1A4C5B)
+                                                        .withOpacity(0.3),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  position: LinearElementPosition.inside,
-                                ),
-                              ],
-                              ranges: [
-                                LinearGaugeRange(
+                                ],
+                                ranges: [
+                                  LinearGaugeRange(
                                     endValue: widgetPointerValue,
                                     color: widgetPointerValue < 200
-                                        ? Color(0xFF1A4C5B).withOpacity(0.5)
+                                        ? const Color(0xFF1A4C5B)
+                                            .withOpacity(0.5)
                                         : widgetPointerValue < 450
-                                            ? Color(0xFF1A4C5B).withOpacity(0.8)
-                                            : Color(0xFF1A4C5B).withOpacity(0.9),
-                                    position: LinearElementPosition.cross)
-                              ],
+                                            ? const Color(0xFF1A4C5B)
+                                                .withOpacity(0.8)
+                                            : const Color(0xFF1A4C5B)
+                                                .withOpacity(0.9),
+                                    position: LinearElementPosition.cross,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0,0),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: Container(
                       height: 510,
                       width: 160,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(
+                          const Text(
                             "Height",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w600),
@@ -279,18 +338,20 @@ class _MyAppState extends State<intro_page3> {
                                     elevation: 3,
                                     elevationColor: Colors.blueGrey,
                                     value: widgetPointerValue,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          widgetPointerValue = value;
-                                        },
-                                      );
+                                    onChanged: (value) async {
+                                      setState(() {
+                                        widgetPointerValue = value;
+                                      });
+                                      await SQLHelper.updateHeight(
+                                          value, widget.name);
                                     },
                                     color: widgetPointerValue < 300
-                                        ? Color(0xFF1A4C5B)
+                                        ? const Color(0xFF1A4C5B)
                                         : widgetPointerValue < 150
-                                            ? Color(0xFF1A4C5B).withOpacity(0.3)
-                                            : Color(0xFF1A4C5B).withOpacity(0.1)),
+                                            ? const Color(0xFF1A4C5B)
+                                                .withOpacity(0.3)
+                                            : const Color(0xFF1A4C5B)
+                                                .withOpacity(0.1)),
                                 LinearWidgetPointer(
                                   value: widgetPointerValue,
                                   onChanged: (value) {
@@ -298,7 +359,8 @@ class _MyAppState extends State<intro_page3> {
                                       widgetPointerValue = value;
                                     });
                                   },
-                                  child: Container(
+                                  position: LinearElementPosition.inside,
+                                  child: SizedBox(
                                     width: 40,
                                     height: 30,
                                     child: Center(
@@ -308,27 +370,29 @@ class _MyAppState extends State<intro_page3> {
                                             fontWeight: FontWeight.w500,
                                             fontSize: 20,
                                             color: widgetPointerValue < 300
-                                                ? Color(0xFF1A4C5B)
+                                                ? const Color(0xFF1A4C5B)
                                                     .withOpacity(0.5)
                                                 : widgetPointerValue < 150
-                                                    ? Color(0xFF1A4C5B)
+                                                    ? const Color(0xFF1A4C5B)
                                                         .withOpacity(0.4)
-                                                    : Color(0xFF1A4C5B)
+                                                    : const Color(0xFF1A4C5B)
                                                         .withOpacity(0.3)),
                                       ),
                                     ),
                                   ),
-                                  position: LinearElementPosition.inside,
                                 ),
                               ],
                               ranges: [
                                 LinearGaugeRange(
                                     endValue: widgetPointerValue,
                                     color: widgetPointerValue < 200
-                                        ? Color(0xFF1A4C5B).withOpacity(0.5)
+                                        ? const Color(0xFF1A4C5B)
+                                            .withOpacity(0.5)
                                         : widgetPointerValue < 450
-                                            ? Color(0xFF1A4C5B).withOpacity(0.8)
-                                            : Color(0xFF1A4C5B).withOpacity(0.9),
+                                            ? const Color(0xFF1A4C5B)
+                                                .withOpacity(0.8)
+                                            : const Color(0xFF1A4C5B)
+                                                .withOpacity(0.9),
                                     position: LinearElementPosition.cross)
                               ],
                             ),
@@ -339,11 +403,10 @@ class _MyAppState extends State<intro_page3> {
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
     );
   }
 }
-

@@ -7,7 +7,7 @@ class AuthService {
     'https://www.googleapis.com/auth/contacts.readonly',
   ]);
 
-  Future<void> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await googleSignIn.signIn();
@@ -21,8 +21,13 @@ class AuthService {
           idToken: googleAuth.idToken,
         );
 
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        final UserCredential authResult =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        return authResult.user;
       }
     } catch (e) {}
+
+    return null;
   }
 }

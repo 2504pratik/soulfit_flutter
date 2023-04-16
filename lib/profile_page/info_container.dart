@@ -1,7 +1,64 @@
 import 'package:flutter/material.dart';
 
-class InfoContainer extends StatelessWidget {
+import '../models/dbHelper.dart';
+
+class InfoContainer extends StatefulWidget {
   const InfoContainer({Key? key}) : super(key: key);
+
+  @override
+  State<InfoContainer> createState() => _InfoContainerState();
+}
+
+class _InfoContainerState extends State<InfoContainer> {
+  final _heightController = TextEditingController();
+  final _weightController = TextEditingController();
+  final _professionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadHeight;
+    _loadWeight;
+    _loadProfession;
+  }
+
+  Future<int> _loadHeight() async {
+    final users = await SQLHelper.getUsers();
+    if (users.isNotEmpty) {
+      final height = users[0]['height'] as double;
+      _heightController.text = height.toString();
+      return height.truncate();
+    }
+    return 0;
+  }
+
+  Future<int> _loadWeight() async {
+    final users = await SQLHelper.getUsers();
+    if (users.isNotEmpty) {
+      final weight = users[0]['weight'] as double;
+      _weightController.text = weight.toString();
+      return weight.truncate();
+    }
+    return 0;
+  }
+
+  Future<String> _loadProfession() async {
+    final users = await SQLHelper.getUsers();
+    if (users.isNotEmpty) {
+      final profession = users[0]['profession'];
+      _professionController.text = profession;
+      return profession;
+    }
+    return '';
+  }
+
+  @override
+  void dispose() {
+    _heightController.dispose();
+    _weightController.dispose();
+    _professionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +97,29 @@ class InfoContainer extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: const Color.fromRGBO(44, 105, 117, 1),
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(
-                            child: Text(
-                              '165 cm',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                          child: Center(
+                            child: FutureBuilder(
+                              future: _loadHeight(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  // While data is being loaded
+                                  return const CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  // If there's an error
+                                  return Text('Error: ${snapshot.error}');
+                                } else {
+                                  // If data has been loaded successfully
+                                  final height = snapshot.data.toString();
+                                  return Text(
+                                    '$height cm',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  );
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -69,13 +144,30 @@ class InfoContainer extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: const Color.fromRGBO(44, 105, 117, 1),
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(
-                            child: Text(
-                              '53 kg',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
+                          child: Center(
+                              child: FutureBuilder(
+                            future: _loadWeight(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                // While data is being loaded
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                // If there's an error
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                // If data has been loaded successfully
+                                final weight = snapshot.data.toString();
+                                return Text(
+                                  '$weight kg',
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                );
+                              }
+                            },
+                          )),
                         ),
                       ),
                       const Text(
@@ -112,12 +204,30 @@ class InfoContainer extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(44, 105, 117, 1),
                         borderRadius: BorderRadius.circular(8)),
-                    child: const Center(
-                      child: Text(
-                        'Student',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
+                    child: Center(
+                        child: FutureBuilder(
+                      future: _loadProfession(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          // While data is being loaded
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          // If there's an error
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          // If data has been loaded successfully
+                          final profession = snapshot.data as String;
+                          return Text(
+                            profession,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          );
+                        }
+                      },
+                    )),
                   ),
                 ],
               ),
