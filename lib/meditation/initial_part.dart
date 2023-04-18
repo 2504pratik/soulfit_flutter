@@ -48,7 +48,7 @@ class InitialPart extends StatelessWidget {
                       child: Row(
                         children: const [
                           Text(
-                            '25',
+                            '0',
                             style: TextStyle(fontSize: 18),
                           ),
                           Icon(

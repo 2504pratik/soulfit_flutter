@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:soulfit/login_page/login_page.dart';
+import 'package:soulfit/rewards_page/rewards_page.dart';
 
 import '../models/dbHelper.dart';
 
@@ -34,16 +35,25 @@ class LastPart extends StatelessWidget {
                       fontSize: 23,
                       fontWeight: FontWeight.w400),
                 ),
-                Container(
-                  height: 40,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(44, 105, 117, 1),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: const Center(
-                    child: Text(
-                      '0',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RewardsPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: const Color.fromRGBO(44, 105, 117, 1),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Center(
+                      child: Text(
+                        '0',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
                     ),
                   ),
                 ),

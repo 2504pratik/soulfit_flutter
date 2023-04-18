@@ -46,8 +46,8 @@ class SecondPart extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromRGBO(15, 111, 189, 0.2),
                   ),
-                  height: 70,
-                  width: 70,
+                  height: MediaQuery.of(context).size.height / 13,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Image.asset(
@@ -63,8 +63,8 @@ class SecondPart extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromRGBO(15, 111, 189, 0.4),
                   ),
-                  height: 70,
-                  width: 70,
+                  height: MediaQuery.of(context).size.height / 13,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Image.asset(
@@ -80,8 +80,8 @@ class SecondPart extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromRGBO(15, 111, 189, 0.6),
                   ),
-                  height: 70,
-                  width: 70,
+                  height: MediaQuery.of(context).size.height / 13,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Image.asset(
@@ -97,8 +97,8 @@ class SecondPart extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromRGBO(15, 111, 189, 0.8),
                   ),
-                  height: 70,
-                  width: 70,
+                  height: MediaQuery.of(context).size.height / 13,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Image.asset(
@@ -114,8 +114,8 @@ class SecondPart extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromRGBO(15, 111, 189, 1),
                   ),
-                  height: 70,
-                  width: 70,
+                  height: MediaQuery.of(context).size.height / 13,
+                  width: MediaQuery.of(context).size.width / 6,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Image.asset(
@@ -158,7 +158,7 @@ class SecondPart extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: ((context) =>
-                                    BreathingExerciseScreen())));
+                                    const BreathingExercise())));
                       },
                       child: CircleAvatar(
                         backgroundColor: Colors.white.withOpacity(0.75),
