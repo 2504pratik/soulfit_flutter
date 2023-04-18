@@ -1,105 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:soulfit/meditation/breathing_circle.dart';
+import 'package:soulfit/meditation/meditation.dart';
 
-class BreathingExerciseScreen extends StatefulWidget {
-  @override
-  _BreathingExerciseScreenState createState() =>
-      _BreathingExerciseScreenState();
-}
-
-class _BreathingExerciseScreenState extends State<BreathingExerciseScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _isBreathingIn = false;
-  int _breathCount = 0;
-  bool _isBreathingEnabled = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    )
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          if (_breathCount < 5) {
-            _controller.reverse();
-            setState(() {
-              _isBreathingIn = !_isBreathingIn;
-              _breathCount++;
-            });
-          } else {
-            _controller.stop();
-            setState(() {
-              _isBreathingEnabled = true;
-              _breathCount = 0;
-            });
-          }
-        }
-      });
-    _animation = Tween<double>(begin: 0, end: 200).animate(_controller);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _startAnimation() {
-    if (_isBreathingEnabled) {
-      _isBreathingEnabled = false;
-      _controller.reset();
-      _controller.forward();
-    }
-  }
-
-  String _getBreathText() {
-    if (_animation.value == 0) {
-      return 'Breathe out';
-    } else {
-      return 'Breathe in';
-    }
-  }
+class BreathingExercise extends StatelessWidget {
+  const BreathingExercise({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Breathing Exercise'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: const Color.fromRGBO(66, 102, 192, 1),
+      body: Stack(children: [
+        Column(
           children: [
-            Container(
-              height: _animation.value,
-              width: _animation.value,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                shape: BoxShape.circle,
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all<double>(0),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(66, 102, 192, 1)),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(MaterialPageRoute(
+                        builder: (context) => const Meditation(),
+                      ));
+                    },
+                    child: Image.asset('assets/images/back_btn.png'),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    'Breathing Exercise',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600),
+                  )
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              _isBreathingIn ? 'Breathe in' : 'Breathe out',
-              style: TextStyle(fontSize: 24),
+            const SizedBox(
+              height: 50,
             ),
-            SizedBox(height: 20),
-            RaisedButton(
-              onPressed: _isBreathingEnabled ? _startAnimation : null,
-              child: Text(
-                _breathCount >= 5 ? 'Complete' : 'Breathe',
-                style: TextStyle(fontSize: 20),
+            const BreathingCircle(),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              '"Relax and centre your focus!"',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            const Text(
+              "You're doing great!",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
               ),
             ),
           ],
         ),
-      ),
+        const Positioned(
+          top: 120,
+          right: 50,
+          child: CircleAvatar(
+            radius: 25,
+            backgroundColor: Color.fromRGBO(80, 190, 225, 1),
+          ),
+        ),
+        const Positioned(
+          bottom: 110,
+          left: 20,
+          child: CircleAvatar(
+            radius: 40,
+            backgroundColor: Color.fromRGBO(80, 190, 225, 1),
+          ),
+        ),
+        const Positioned(
+          top: 180,
+          left: 20,
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Color.fromRGBO(80, 190, 225, 1),
+          ),
+        ),
+        const Positioned(
+          top: 460,
+          right: 60,
+          child: CircleAvatar(
+            radius: 7,
+            backgroundColor: Colors.white,
+          ),
+        )
+      ]),
     );
   }
 }

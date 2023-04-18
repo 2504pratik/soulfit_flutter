@@ -13,7 +13,7 @@ class Meditation extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(97, 159, 210, 1),
         body: SingleChildScrollView(
           child: Column(
-            children: const [InitialPart(), SecondPart(), ThirdPart()],
+            children: [InitialPart(), SecondPart(), ThirdPart()],
           ),
         ));
   }
