@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                         width: 20,
                       ),
                       const Text(
-                        'Good \nMorning!',
+                        'Good \nEvening!',
                         style: TextStyle(
                           fontSize: 40,
                           color: Colors.white,

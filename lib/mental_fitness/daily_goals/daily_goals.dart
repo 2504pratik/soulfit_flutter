@@ -12,7 +12,7 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
 
   @override
   Widget build(BuildContext context) {
-    double progressValue = tasksCompleted / 4;
+    double progressValue = tasksCompleted / 3;
     Color uncompletedColor = const Color.fromRGBO(134, 225, 184, 0.6);
     Color completedColor = const Color.fromRGBO(44, 112, 82, 1);
 
@@ -95,10 +95,28 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildTaskContainer('Task 1', 0, 'Health'),
-                  _buildTaskContainer('Task 2', 1, 'Knowledge'),
-                  _buildTaskContainer('Task 3', 2, 'Walk'),
-                  _buildTaskContainer('Task 4', 3, 'Fun'),
+                  _buildTaskContainer(
+                    'Task 1',
+                    0,
+                    'Health',
+                    'Drink 8 glasses of water',
+                    const Color.fromRGBO(97, 159, 210, 1),
+                    'assets/images/glass.png',
+                  ),
+                  _buildTaskContainer(
+                      'Task 2',
+                      1,
+                      'Knowledge',
+                      'Read 10 pages',
+                      const Color.fromRGBO(153, 97, 210, 1),
+                      'assets/images/books.png'),
+                  _buildTaskContainer(
+                      'Task 3',
+                      2,
+                      'Walk',
+                      'Walk my dog in the evening',
+                      const Color.fromRGBO(210, 131, 97, 1),
+                      'assets/images/walk.png'),
                 ],
               ),
             ),
@@ -108,7 +126,8 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
     );
   }
 
-  Widget _buildTaskContainer(String taskName, int taskIndex, String title) {
+  Widget _buildTaskContainer(String taskName, int taskIndex, String title,
+      String subtitle, Color color, String imageName) {
     bool isCompleted = tasksCompleted > taskIndex;
     return Container(
       width: 300.0,
@@ -131,9 +150,9 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
               Container(
                 height: 20,
                 width: 90,
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(97, 159, 210, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),
                 child: Center(
                   child: Text(
@@ -142,9 +161,9 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
                   ),
                 ),
               ),
-              const Text(
-                'Drink 8 glasses of water',
-                style: TextStyle(
+              Text(
+                subtitle,
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -170,14 +189,13 @@ class _HabitTrackerContainerState extends State<HabitTrackerContainer> {
                             tasksCompleted++;
                           });
                         },
-                        child: const Text('Complete',
-                            style: TextStyle(
-                                color: Color.fromRGBO(97, 159, 210, 1))),
+                        child:
+                            Text('Yet to do!', style: TextStyle(color: color)),
                       ),
               )
             ],
           ),
-          Image.asset('assets/images/glass.png')
+          Image.asset(imageName)
         ],
       ),
     );
